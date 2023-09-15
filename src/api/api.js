@@ -1,6 +1,7 @@
 import axios from "axios";
 
 // для тест комита
+// тест 2
 
 const axiosInstance = axios.create({
   baseURL: "https://social-network.samuraijs.com/api/1.0/",
