@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import React from 'react';
 import Preloader from '../common/Preloader/Preloader';
 import { useParams } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 const withRouter = (Children) => {
     return (props) => {
@@ -19,7 +20,6 @@ class ProfileContainer extends React.Component {
         this.props.getProfile(this.props.match.params.userId);
     }
     render() {
-        if (!this.props.isAuth) { return <Navigate to="/login" /> }
 
         if (!this.props.data.profile) {
             return (<Preloader />)
@@ -32,12 +32,14 @@ class ProfileContainer extends React.Component {
 
 const mapSateToProps = (state) => {
     return {
-        isAuth: state.auth.isAuth,
         data: state.profile,
     }
 }
 
-const ProfileContainerWithUrl = withRouter(ProfileContainer);
 
 
-export default connect(mapSateToProps, { addMessage, changeMessage, getProfile })(ProfileContainerWithUrl);
+export default compose(
+    connect(mapSateToProps, { addMessage, changeMessage, getProfile }),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer);

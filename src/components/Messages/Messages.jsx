@@ -2,7 +2,6 @@ import style from './Message.module.css'
 import Dialog from './Dialog/Dialog';
 import Message from './Message/Message';
 import React from 'react';
-import { Navigate } from 'react-router-dom';
 
 
 const Messages = (props) => {
@@ -26,9 +25,6 @@ const Messages = (props) => {
         })
     }
 
-
-
-    if (!props.isAuth) { return <Navigate to="/login" /> }
 
     return (
         <div className={style.wrap}>

@@ -1,7 +1,6 @@
 import React from 'react';
 import style from './Music.module.css'
 import Track from './Track/Track';
-import { Navigate } from 'react-router-dom';
 
 const newMusic = [
     {
@@ -38,9 +37,6 @@ const Music = (props) => {
     if (props.data.length === 0) {
         addMusic(newMusic)
     }
-
-    if (!props.isAuth) { return <Navigate to="/login" /> }
-
 
     return (
         <ul className={style.items}>

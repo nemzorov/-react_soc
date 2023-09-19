@@ -1,12 +1,13 @@
 import Music from "./Music";
 import { connect } from "react-redux";
 import { estimateAC, setMusicAC } from "../../redux/music-reducer";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 
 const stateToProps = (state) => {
 
     return {
         data: state.music.music,
-        isAuth: state.auth.isAuth,
     }
 }
 
@@ -21,6 +22,8 @@ const dispatchToProps = (dispatch) => {
     }
 }
 
-const MusicContainer = connect(stateToProps, dispatchToProps)(Music);
 
-export default MusicContainer;
+export default compose(
+    connect(stateToProps, dispatchToProps),
+    withAuthRedirect
+)(Music)

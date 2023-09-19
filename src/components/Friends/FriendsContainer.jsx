@@ -3,7 +3,8 @@ import Friends from './Friends';
 import { connect } from 'react-redux';
 import { follow, unfollow, toggleFollowingProgress, getUsers } from "../../redux/friends-reducer";
 import Preloader from '../common/Preloader/Preloader';
-import { Navigate } from 'react-router-dom';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 class FriendsContainer extends React.Component {
     componentDidMount() {
@@ -15,7 +16,6 @@ class FriendsContainer extends React.Component {
     }
 
     render() {
-        if (!this.props.isAuth) { return <Navigate to="/login" /> }
         return (
             <>
                 {this.props.preloader ?
@@ -40,7 +40,6 @@ class FriendsContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        isAuth: state.auth.isAuth,
         data: state.friends.friends,
         currentPage: state.friends.currentPage,
         sizePage: state.friends.sizePage,
@@ -50,6 +49,8 @@ const mapStateToProps = (state) => {
     }
 }
 
+export default compose(
+    connect(mapStateToProps, { follow, unfollow, toggleFollowingProgress, getUsers }),
+    withAuthRedirect
+)(FriendsContainer);
 
-
-export default connect(mapStateToProps, { follow, unfollow, toggleFollowingProgress, getUsers })(FriendsContainer);
