@@ -1,10 +1,10 @@
 import React from 'react';
 import Post from './Posts/Post';
 import style from './Profile.module.css'
+import ProfileStatus from './ProfileStatus'
 
 const Profile = (props) => {
     let newMessage = React.createRef();
-
 
     return (
         <div className={style.wrap}>
@@ -15,7 +15,7 @@ const Profile = (props) => {
             </div>
             <div className={style.right}>
                 <div className={style.name}>{props.data.profile.fullName}</div>
-                <div className={style.status}>{props.data.profile.status}</div>
+                <ProfileStatus style={style.status} status="Какие дела?" />
 
                 <div className={style.wall}>
                     <div className={style.send}>
