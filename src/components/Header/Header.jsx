@@ -9,7 +9,7 @@ const Header = (props) => {
                 <div className={style.name}>Соц. сеть</div>
             </NavLink>
 
-            {props.data.isAuth ? props.data.login : <NavLink to="/login" className={style.auth}>Войти</NavLink>}
+            {props.data.isAuth ? props.data.login : <NavLink target='_blank' to="https://social-network.samuraijs.com/login" className={style.auth}>Войти</NavLink>}
 
         </div>
     );
